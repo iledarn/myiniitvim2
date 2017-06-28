@@ -25,9 +25,13 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
 
   call dein#add('christoomey/vim-tmux-navigator')
 
+  " Shougo
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/unite-outline')
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/vimfiler.vim')
 
+  " GIT
   call dein#add('tpope/vim-fugitive')
   call dein#add('junegunn/gv.vim')
   call dein#add('jreybert/vimagit')
@@ -36,6 +40,7 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
   " pip2 install jedi
   call dein#add('zchee/deoplete-jedi')
 
+  " tpope
   call dein#add('tpope/vim-sleuth')
   call dein#add('tpope/vim-unimpaired')
   call dein#add('tpope/vim-repeat')
@@ -44,6 +49,20 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
   call dein#add('tpope/vim-endwise')
   call dein#add('tpope/vim-rsi')
   call dein#add('tpope/vim-obsession')
+  call dein#add('tpope/vim-sensible')
+
+  " syntax highlighting
+  call dein#add('ekalinin/Dockerfile.vim')
+
+  " working with csv
+  call dein#add('chrisbra/csv.vim')
+
+  " search plugins
+  call dein#add('osyo-manga/vim-anzu')
+
+  " xml plugins
+  call dein#add('sukima/xmledit')
+  call dein#add('actionshrimp/vim-xpath')
 
   " Required:
   call dein#end()
@@ -108,3 +127,103 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#auto_completion_start_length = 3
 let g:deoplete#sources#jedi#python_path = '/usr/bin/python2'
+
+let g:airline#extensions#anzu#enabled = 1
+" mapping
+nmap n <Plug>(anzu-n-with-echo)
+nmap N <Plug>(anzu-N-with-echo)
+nmap * <Plug>(anzu-star-with-echo)
+nmap # <Plug>(anzu-sharp-with-echo)
+" clear status
+nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
+
+nmap <leader>b :Denite buffer<cr>
+" Change mappings.
+call denite#custom#map(
+  \ 'insert',
+  \ '<C-j>',
+  \ '<denite:move_to_next_line>',
+  \ 'noremap'
+\)
+call denite#custom#map(
+  \ 'insert',
+  \ '<C-k>',
+  \ '<denite:move_to_previous_line>',
+  \ 'noremap'
+\)
+
+nmap <leader>* :Ag <c-r>=expand("<cword>")<cr><cr>
+nmap <leader>// :Ag<space>
+
+
+" VimFiler
+nmap <leader>\ :VimFiler<cr>
+nmap <leader>\\ :VimFiler -find<cr>
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_restore_alternate_file = 1
+let g:vimfiler_tree_indentation = 1
+let g:vimfiler_tree_leaf_icon = ''
+let g:vimfiler_tree_opened_icon = '▼'
+let g:vimfiler_tree_closed_icon = '▷'
+let g:vimfiler_file_icon = ''
+let g:vimfiler_readonly_file_icon = '*'
+let g:vimfiler_marked_file_icon = '√'
+let g:vimfiler_ignore_pattern = [
+            \ '^\.git$',
+            \ '^\.DS_Store$',
+            \ '^\.init\.vim-rplugin\~$',
+            \ '^\.netrwhist$',
+            \ '\%(^\.\|\.pyc$\)',
+            \ '\.class$'
+            \]
+let g:vimfiler_quick_look_command = 'gloobus-preview'
+call vimfiler#custom#profile('default', 'context', {
+            \ 'explorer' : 1,
+            \ 'winwidth' : 30,
+            \ 'winminwidth' : 30,
+            \ 'toggle' : 1,
+            \ 'columns' : 'type',
+            \ 'auto_expand': 1,
+            \ 'direction' : 'topleft',
+            \ 'parent': 0,
+            \ 'explorer_columns' : 'type',
+            \ 'status' : 1,
+            \ 'safe' : 0,
+            \ 'split' : 1,
+            \ 'hidden': 1,
+            \ 'no_quit' : 1,
+            \ 'force_hide' : 0,
+            \ })
+augroup vfinit
+    au!
+    autocmd FileType vimfiler call s:vimfilerinit()
+    autocmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') |
+                \ q | endif
+augroup END
+function! s:vimfilerinit()
+    set nonumber
+    set norelativenumber
+
+    silent! nunmap <buffer> <Space>
+    silent! nunmap <buffer> <C-l>
+    silent! nunmap <buffer> <C-j>
+    silent! nunmap <buffer> gr
+    silent! nunmap <buffer> gf
+    silent! nunmap <buffer> -
+    silent! nunmap <buffer> s
+
+    nnoremap <silent><buffer> gr  :<C-u>Denite grep:<C-R>=<SID>selected()<CR> -buffer-name=grep<CR>
+    nnoremap <silent><buffer> gf  :<C-u>Denite file_rec:<C-R>=<SID>selected()<CR><CR>
+    nnoremap <silent><buffer> gd  :<C-u>call <SID>change_vim_current_dir()<CR>
+    nnoremap <silent><buffer><expr> sg  vimfiler#do_action('vsplit')
+    nnoremap <silent><buffer><expr> sv  vimfiler#do_action('split')
+    nnoremap <silent><buffer><expr> st  vimfiler#do_action('tabswitch')
+    nmap <buffer> gx     <Plug>(vimfiler_execute_vimfiler_associated)
+    nmap <buffer> '      <Plug>(vimfiler_toggle_mark_current_line)
+    nmap <buffer> v      <Plug>(vimfiler_quick_look)
+    nmap <buffer> p      <Plug>(vimfiler_preview_file)
+    nmap <buffer> V      <Plug>(vimfiler_clear_mark_all_lines)
+    nmap <buffer> i      <Plug>(vimfiler_switch_to_history_directory)
+    nmap <buffer> <Tab>  <Plug>(vimfiler_switch_to_other_window)
+    nmap <buffer> <C-r>  <Plug>(vimfiler_redraw_screen)
+endf
