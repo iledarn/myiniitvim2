@@ -17,6 +17,7 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
   call dein#add('vim-airline/vim-airline')
 
   call dein#add('altercation/vim-colors-solarized')
+  call dein#add('tomasr/molokai')
   call dein#add('vim-airline/vim-airline-themes')
 
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
@@ -79,7 +80,7 @@ nmap <leader><Tab> :b#<cr>
 
 nmap <leader>w :w<cr>
 
-colorscheme solarized
+colorscheme molokai
 set background=dark
 
 let g:airline_powerline_fonts = 1
@@ -87,7 +88,7 @@ augroup Fix_airline_with_unite
     autocmd FileType unite AirlineRefresh
     autocmd FileType vimfiler AirlineRefresh
 augroup END
-let g:airline_theme='solarized' " dark simple badwolf solarized solarized2
+let g:airline_theme='molokai' " dark simple badwolf solarized solarized2
 let g:airline#extensions#tabline#enabled = 1
 
 set noshowmode
