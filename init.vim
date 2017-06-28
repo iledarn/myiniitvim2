@@ -64,6 +64,12 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
   call dein#add('sukima/xmledit')
   call dein#add('actionshrimp/vim-xpath')
 
+  " color
+  call dein#add('sentientmachine/Pretty-Vim-Python')
+
+  " trailing whitespace
+  call dein#add('ntpeters/vim-better-whitespace')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -100,7 +106,7 @@ nmap <leader><Tab> :b#<cr>
 nmap <leader>w :w<cr>
 
 colorscheme molokai
-set background=dark
+" set background=dark
 
 let g:airline_powerline_fonts = 1
 augroup Fix_airline_with_unite
