@@ -37,6 +37,8 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
   call dein#add('tpope/vim-fugitive')
   call dein#add('junegunn/gv.vim')
   call dein#add('jreybert/vimagit')
+  call dein#add('sjl/splice.vim')
+  call dein#add('airblade/vim-gitgutter')
 
   call dein#add('Shougo/deoplete.nvim')
   " pip2 install jedi
@@ -76,6 +78,12 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
   " SQL
   call dein#add('vim-scripts/SQLComplete.vim')
   call dein#add('vim-scripts/dbext.vim')
+
+  " Start window, recent files
+  call dein#add('mhinz/vim-startify')
+
+  " Sayonara
+  call dein#add('mhinz/vim-sayonara')
 
   " Required:
   call dein#end()
@@ -246,3 +254,10 @@ endf
 let python_highlight_all = 1
 
 let base16colorspace=256
+
+" vim-startify
+let g:startify_change_to_vcs_root = 1
+
+" Sayonara
+nmap <leader>bd :Sayonara!<cr>
+nmap <leader>bdd :Sayonara<cr>
