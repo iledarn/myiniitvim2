@@ -17,10 +17,12 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
   call dein#add('vim-airline/vim-airline')
 
   call dein#add('altercation/vim-colors-solarized')
+  call dein#add('morhetz/gruvbox')
   call dein#add('tomasr/molokai')
+  call dein#add('chriskempson/base16-vim')
   call dein#add('vim-airline/vim-airline-themes')
 
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   call dein#add('christoomey/vim-tmux-navigator')
@@ -65,10 +67,15 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
   call dein#add('actionshrimp/vim-xpath')
 
   " color
-  call dein#add('sentientmachine/Pretty-Vim-Python')
+  " call dein#add('sentientmachine/Pretty-Vim-Python')
+  call dein#add('hdima/python-syntax')
 
   " trailing whitespace
   call dein#add('ntpeters/vim-better-whitespace')
+
+  " SQL
+  call dein#add('vim-scripts/SQLComplete.vim')
+  call dein#add('vim-scripts/dbext.vim')
 
   " Required:
   call dein#end()
@@ -105,15 +112,15 @@ nmap <leader><Tab> :b#<cr>
 
 nmap <leader>w :w<cr>
 
-colorscheme molokai
-" set background=dark
+colorscheme gruvbox
+set background=dark
 
 let g:airline_powerline_fonts = 1
 augroup Fix_airline_with_unite
     autocmd FileType unite AirlineRefresh
     autocmd FileType vimfiler AirlineRefresh
 augroup END
-let g:airline_theme='molokai' " dark simple badwolf solarized solarized2
+let g:airline_theme='tomorrow' " dark simple badwolf solarized solarized2
 let g:airline#extensions#tabline#enabled = 1
 
 set noshowmode
@@ -233,3 +240,9 @@ function! s:vimfilerinit()
     nmap <buffer> <Tab>  <Plug>(vimfiler_switch_to_other_window)
     nmap <buffer> <C-r>  <Plug>(vimfiler_redraw_screen)
 endf
+
+
+" call dein#add('hdima/python-syntax')
+let python_highlight_all = 1
+
+let base16colorspace=256
