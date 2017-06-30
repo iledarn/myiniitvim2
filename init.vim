@@ -261,3 +261,5 @@ let g:startify_change_to_vcs_root = 1
 " Sayonara
 nmap <leader>bd :Sayonara!<cr>
 nmap <leader>bdd :Sayonara<cr>
+
+set autoread
