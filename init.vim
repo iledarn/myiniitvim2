@@ -262,8 +262,6 @@ let g:startify_change_to_vcs_root = 1
 nmap <leader>bd :Sayonara!<cr>
 nmap <leader>bdd :Sayonara<cr>
 
-set autoread
-
 " Denite
 " Change mappings.
 call denite#custom#map(
