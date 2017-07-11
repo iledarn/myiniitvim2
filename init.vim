@@ -85,6 +85,9 @@ if dein#load_state('/home/ildar/.config/nvim/dein/')
   " Sayonara
   call dein#add('mhinz/vim-sayonara')
 
+  " Linters
+  call dein#add('neomake/neomake')
+
   " Required:
   call dein#end()
   call dein#save_state()
