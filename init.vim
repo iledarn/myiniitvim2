@@ -120,7 +120,7 @@ nmap <leader><Tab> :b#<cr>
 
 nmap <leader>w :w<cr>
 
-colorscheme gruvbox
+colorscheme solarized
 set background=dark
 
 let g:airline_powerline_fonts = 1
@@ -128,7 +128,7 @@ augroup Fix_airline_with_unite
     autocmd FileType unite AirlineRefresh
     autocmd FileType vimfiler AirlineRefresh
 augroup END
-let g:airline_theme='tomorrow' " dark simple badwolf solarized solarized2
+let g:airline_theme='solarized' " dark simple badwolf solarized solarized2
 let g:airline#extensions#tabline#enabled = 1
 
 set noshowmode
