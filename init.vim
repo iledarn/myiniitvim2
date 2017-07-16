@@ -123,6 +123,7 @@ nmap <leader><Tab> :b#<cr>
 
 nmap <leader>w :w<cr>
 
+let g:gruvbox_italic=1
 colorscheme gruvbox
 set background=dark
 
@@ -279,3 +280,5 @@ call denite#custom#map(
   \ '<denite:move_to_previous_line>',
   \ 'noremap'
 \)
+
+set termguicolors
